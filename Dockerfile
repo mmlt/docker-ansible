@@ -13,6 +13,9 @@ RUN apt-get update \
 # Azure CLI
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
+# Additional Python packages
+RUN pip install netaddr
+
 # Create user
 COPY ["./createuser.sh", "./run.sh", "/"]
 ENTRYPOINT ["/run.sh"]

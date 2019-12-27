@@ -6,7 +6,7 @@
 
 
 if [ -n "$XXNAME" ]; then
-  /createuser.sh $XXNAME $XXUID $XXGID "PATH"
+  /createuser.sh $XXNAME $XXUID $XXGID "ANSIBLE_AZURE_AUTH_SOURCE"
   su - $XXNAME -c '"$0" "$@"' -- "$@"
 else
   if [ $# = 1 ]; then imagename=$1; else imagename="pietere/ansible"; fi
@@ -26,9 +26,9 @@ else
   echo "#"
   echo "# Note: the CWD is mounted as ~ in the container."
   echo 
-  echo "alias ansible=\"docker run -ti --rm -e XXNAME=\$(id -un) -e XXUID=\$(id -u) -e XXGID=\$(id -g) -v \$(pwd):/home/\$(id -un) $imagename ansible \""
-  echo "alias ansible-doc=\"docker run -ti --rm -e XXNAME=\$(id -un) -e XXUID=\$(id -u) -e XXGID=\$(id -g) -v \$(pwd):/home/\$(id -un) $imagename ansible-doc \""
-  echo "alias ansible-playbook=\"docker run -ti --rm -e XXNAME=\$(id -un) -e XXUID=\$(id -u) -e XXGID=\$(id -g) -v \$(pwd):/home/\$(id -un) $imagename ansible-playbook \""
+  echo "alias ansible=\"docker run -ti --rm -e XXNAME=\$(id -un) -e XXUID=\$(id -u) -e XXGID=\$(id -g) -v \\\$(pwd):/home/\$(id -un) $imagename ansible \""
+  echo "alias ansible-doc=\"docker run -ti --rm -e XXNAME=\$(id -un) -e XXUID=\$(id -u) -e XXGID=\$(id -g) -v \\\$(pwd):/home/\$(id -un) $imagename ansible-doc \""
+  echo "alias ansible-playbook=\"docker run -ti --rm -e XXNAME=\$(id -un) -e XXUID=\$(id -u) -e XXGID=\$(id -g) -v \\\$(pwd):/home/\$(id -un) $imagename ansible-playbook \""
   echo "alias az=\"docker run -ti --rm -e XXNAME=\$(id -un) -e XXUID=\$(id -u) -e XXGID=\$(id -g) -v \$(pwd):/home/\$(id -un) $imagename az \""
-  echo "alias enter-ansible-azure-container=\"docker run -ti --rm -e XXNAME=\$(id -un) -e XXUID=\$(id -u) -e XXGID=\$(id -g) -v \$(pwd):/home/\$(id -un) $imagename \""
+  echo "alias enter-ansible-azure-container=\"docker run -ti --rm -e XXNAME=\$(id -un) -e XXUID=\$(id -u) -e XXGID=\$(id -g) -v \\\$(pwd):/home/\$(id -un) $imagename \""
 fi

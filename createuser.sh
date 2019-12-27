@@ -9,4 +9,4 @@ useradd --gid $3 -u $2 --groups sudo -s /bin/bash -m $1 2>/dev/null # suppress u
 echo $1:password | chpasswd
 # Pass environment
 #rm -f /home/$1/.profile
-#for v in $4; do echo "export $v=${!v}" >>  /home/$1/.profile; done
+for v in $4; do echo "export $v=${!v}" >>  /home/$1/.profile; done
